@@ -1,0 +1,31 @@
+.Content{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    width: 50%;
+    justify-content: center;
+    align-items: center;
+    padding:10px;
+    background-color: rgb(57, 62, 70);
+}
+.Content .date{
+ color: rgb(255, 211, 105);   
+ margin: 0px;
+}
+.Content .topic{
+        color: rgb(238, 238, 238);
+        margin: 0px;
+}
+.Content .button{
+    background:none;
+    padding: 10px 30px;
+    color: rgb(238, 238, 238);
+    border: 1px solid rgb(255, 211, 105);  
+    
+}
+.Content .user_name{
+    color: rgba(238,238,238,0.5);
+    font-size: small;
+
+}
