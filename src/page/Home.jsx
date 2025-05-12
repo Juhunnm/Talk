@@ -1,22 +1,17 @@
 import Content from "../component/Content";
-import TopicItem from "../component/TopicItem";
+import Header from "../component/Header";
+import "./Home.css";
+import TopicList from "../component/TalkList";
+import { useContext } from "react";
+import { TalkDispatchContext, TalkStateContext } from "../App";
 
 const Home = () => {
+  const data = useContext(TalkStateContext);
   return (
     <div className="Home">
-      home
+      <Header />
       <Content />
-      <div className="input">
-        <select name="" id="">
-          <option value="">카테고리 1</option>
-          <option value="">카테고리 2</option>
-          <option value="">카테고리 3</option>
-        </select>
-        <input placeholder="add topic..." />
-        <button>ADD</button>
-      </div>
-      <hr />
-      <TopicItem />
+      <TopicList data={data} />
     </div>
   );
 };
