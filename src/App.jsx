@@ -5,7 +5,6 @@ import Home from "./page/Home";
 import NotFound from "./page/NotFound";
 import { createContext, useReducer, useRef } from "react";
 import New from "./component/New";
-import Edit from "./page/Edit";
 
 const mockData = [
   //주제,사용자,시간,
@@ -38,6 +37,8 @@ function reducer(state, action) {
   switch (action.type) {
     case "CREATE":
       return [action.data, ...state];
+    case "DELETE":
+      return state.filter((item) => String(item.id) !== String(action.id));
   }
   return state;
 }
@@ -59,15 +60,21 @@ const App = () => {
     });
   };
 
+  const onDelete = (id) => {    
+    dispath({
+      type: "DELETE",
+      id,
+    });
+  };
+
   return (
     <>
       <div className="App">
         <TalkStateContext.Provider value={data}>
-          <TalkDispatchContext.Provider value={{ onCreate }}>
+          <TalkDispatchContext.Provider value={{ onCreate, onDelete }}>
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/new" element={<New />} />
-              <Route path ='/edit/:id' element={<Edit />}/> 
               <Route path="/talk/:id" element={<Talk />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

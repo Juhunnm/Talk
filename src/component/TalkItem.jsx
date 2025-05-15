@@ -1,6 +1,7 @@
 import { useNavigate } from "react-router-dom";
 import "./TalkItem.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TalkDispatchContext } from "../App";
 
 const TalkItem = ({
   id,
@@ -14,11 +15,16 @@ const TalkItem = ({
   votes,
 }) => {
   const [isLiked, setIsLiked] = useState(false);
+  const { onDelete } = useContext(TalkDispatchContext);
   const nav = useNavigate();
 
   const handleLike = () => {
     setIsLiked(!isLiked);
   };
+  const handleDelete = () => {
+    onDelete(id);
+  };
+
   // const getStatus = (createdDate) => {
   //   const now = new Date();
   //   const created = new Date(createdDate);
@@ -43,8 +49,8 @@ const TalkItem = ({
             {new Date(createdDate).toLocaleDateString()}
           </span>
           <span className={`status ${status}`}>{status.toUpperCase()}</span>
-          <button className="edit_btn" onClick={() => nav(`/edit/${id}`)}>
-            ✏️
+          <button className="edit_btn" onClick={handleDelete}>
+            ❌
           </button>
         </div>
         {/* mid */}
