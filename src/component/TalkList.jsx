@@ -5,7 +5,7 @@ import TalkItem from "./TalkItem";
 
 const TalkList = ({ data }) => {
   const nav = useNavigate();
-
+  
   return (
     <div className="TalkList">
       <div className="menu_bar">

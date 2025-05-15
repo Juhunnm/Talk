@@ -4,47 +4,64 @@ import { useRef, useState } from "react";
 
 const Editor = ({ onSubmit }) => {
   const [input, setInput] = useState({
-    createdDate: new Date().getTime(),
+    createdDate: new Date(),
     content1: "",
     content2: "",
-    userName: "test",
+    userName: "testuser",
+    tags: "",
   });
+
   const contentRef = useRef();
 
-  const onChangeContent = (e) => {
-    let name = e.target.name;
-    let value = e.target.value;
-
+  const onChange = (e) => {
+    const { name, value } = e.target;
     setInput({ ...input, [name]: value });
   };
 
-  const onSubmitButtonClick = () => {
-    onSubmit(input);
+  const handleSubmit = () => {
+    const { createdDate, content1, content2, userName, tags} = input;
+    onSubmit({
+      createdDate,
+      userName,
+      title: { content1, content2 },
+      views: 0,
+      likes: 0,
+      votes: { content1: 0, content2: 0 },
+      tags: tags.split(",").map((t) => t.trim()),
+      status:"waiting",
+    });
   };
   return (
     <div className="Editor">
-      <section className="topic1_section">
-        <h4>1 Topic</h4>
+      <section>
+        <h4>Topic 1</h4>
         <input
           name="content1"
-          ref={contentRef}
-          onChange={onChangeContent}
           value={input.content1}
-          placeholder="new topic1..."
+          onChange={onChange}
+          placeholder="예: 고양이가 귀엽다"
+          ref={contentRef}
         />
-        VS
       </section>
-      <section className="topic2_section">
-        <h4>2 Topic</h4>
+      <section>
+        <h4>Topic 2</h4>
         <input
           name="content2"
-          onChange={onChangeContent}
           value={input.content2}
-          placeholder="new topic2..."
+          onChange={onChange}
+          placeholder="예: 강아지가 귀엽다"
         />
       </section>
-
-      <button onClick={onSubmitButtonClick}>ADD</button>
+      <section>
+        <h4>태그 (쉼표로 구분)</h4>
+        <input
+          name="tags"
+          value={input.tags}
+          onChange={onChange}
+          placeholder="예: 반려동물, 토론"
+        />
+      </section>
+      <button onClick={handleSubmit}>추가하기</button>
     </div>
   );
 };

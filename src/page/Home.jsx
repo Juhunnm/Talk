@@ -1,9 +1,9 @@
 import Content from "../component/Content";
 import Header from "../component/Header";
 import "./Home.css";
-import TopicList from "../component/TalkList";
+import TalkList from "../component/TalkList";
 import { useContext } from "react";
-import { TalkDispatchContext, TalkStateContext } from "../App";
+import { TalkStateContext } from "../App";
 
 const Home = () => {
   const data = useContext(TalkStateContext);
@@ -11,7 +11,7 @@ const Home = () => {
     <div className="Home">
       <Header />
       <Content />
-      <TopicList data={data} />
+      <TalkList data={data} />
     </div>
   );
 };

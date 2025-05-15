@@ -11,7 +11,7 @@ const New = () => {
   const nav = useNavigate();
 
   const onSubmit = (input) => {
-    onCreate(input.createdDate, input.content1, input.content2, input.userName);
+    onCreate(input);
     nav("/", { replace: true });
   };
 
